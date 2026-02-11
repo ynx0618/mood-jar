@@ -741,25 +741,26 @@ function renderWrapDiary(container, entries) {
   container.innerHTML = items;
 }
 
-let wrapTabsInitialized = false;
 function initWrapTabs(root) {
-  if (!root || wrapTabsInitialized) return;
-  wrapTabsInitialized = true;
+  if (!root) return;
+  // allow initialization per root element so multiple popups/modals work independently
+  if (root.dataset.wrapTabsInit === '1') return;
+  root.dataset.wrapTabsInit = '1';
+
   root.querySelectorAll('.wrap-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       const target = tab.getAttribute('data-wrap-tab');
       // deactivate siblings
       root.querySelectorAll('.wrap-tab').forEach(t => t.classList.toggle('active', t === tab));
 
-      // hide/show panes
+      // find panes inside this root (support both wrap and archive naming)
+      const stats = root.querySelector('#wrapStatsPane') || root.querySelector('#archiveStatsPane');
+      const diary = root.querySelector('#wrapDiaryPane') || root.querySelector('#archiveDiaryPane');
+
       if (target === 'stats' || target === 'archive-stats') {
-        const stats = root.querySelector('#wrapStatsPane') || root.querySelector('#archiveStatsPane');
-        const diary = root.querySelector('#wrapDiaryPane') || root.querySelector('#archiveDiaryPane');
         if (stats) stats.style.display = '';
         if (diary) diary.style.display = 'none';
       } else {
-        const stats = root.querySelector('#wrapStatsPane') || root.querySelector('#archiveStatsPane');
-        const diary = root.querySelector('#wrapDiaryPane') || root.querySelector('#archiveDiaryPane');
         if (stats) stats.style.display = 'none';
         if (diary) diary.style.display = '';
       }
