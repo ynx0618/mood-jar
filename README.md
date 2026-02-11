@@ -1,6 +1,5 @@
-🌸 Mood Jar — Emotional Sediment Tracker
-
-  A soft, aesthetic emotional journaling experience where feelings don’t disappear: they settle, layer, and accumulate like sand in a jar. Instead of tracking productivity, Mood Jar visualizes your emotional landscape over time.
+🌸 Mood Jar
+🌐 Live at: https://ynx0618.github.io/mood-jar/
 
 ✨ Concept
 
@@ -11,163 +10,53 @@
   - Colors blend like emotional geology
   - Your jar becomes a reflection of your inner world
 
-Think: Digital emotion bottle × memory jar × sand art therapy.
+Think: Digital emotion bottle × memory jar × water art therapy.
 
 🫙 Features
-  🎭 Mood Selection - Choose from eight emotional states: 
-
-    🔅 Happy
+  
+    🌸 Mood Logging — Select an emotion and add a short diary entry
     
-    🫧 Sad
+    💧 Drop Animation — Each mood falls into the jar visually
     
-    🎧 Energetic
+    📊 Mood Wrap — View emotional distribution and dominant feelings
     
-    🌪️ Angry
+    🫙 Jar Fill Visualization — Watch the jar fill over time
     
-    👾 Anxious
+    🗂️ Archive Collection — Store and revisit past jars
     
-    🤍 Love
+    ✏️ Diary Memories — Each mood can hold a written reflection
     
-    🪷 Neutral
-
-    🥠 Surprised
-
-
-  ✍️ Diary Logging - Optional free-text journaling:
-
-    Write thoughts about your day
-
-    Attach context to each emotional drop
-
-    Stored locally (MVP stage)
-
-  🌊 Sediment Jar Visualization
-
-    Each mood becomes a colored layer
-
-    Layers stack from bottom → top
-
-    Slight blur + blend creates sand texture
-
-    Fully empty on initialization
-
-  💧 Pour Animation
-
-    When you click Drop into Jar:
-
-    Liquid emotion pours down
-
-    Falls fully to jar bottom
-
-    Settles into sediment layer
-
-    Creates tactile emotional feedback
-
-  🫧 Floating Emoji Feedback - When selecting a mood:
-
-    Emoji floats upward
-
-    Fades + scales
-
-    Adds soft emotional delight
-
-  📊 Mood Wrap Analytics - Click the jar to reveal your Mood Wrap:
-
-      Displays:
-
-      Most felt emotion
-
-    Percentage breakdown
-
-    Entry counts per mood
-
-      Example:
-      
-      Most felt: Calm 💗
-      
-      happy: 20% (3)
-      calm: 40% (6)
-      sad: 10% (1)
-      ...
-      
-      
-      A reflective emotional summary.
-
-  ♻️ Jar Reset + Archive System
-      
-      Users can reset their jar to start a new emotional chapter.
-      
-      Reset behavior:
-      
-      Current jar is archived
-      
-      New jar initializes empty
-      
-      Mood counts reset
-      
-      Archived jars represent past emotional periods.
-
-  🗂 Archive Collection (In Progress)
-
-      Planned archive gallery will include:
-      
-      Mini jar previews
-      
-      Mood distribution snapshots
-      
-      Date ranges
-      
-      Click-to-view Mood Wrap
-      
-      Turning emotional logs into a timeline artifact.
+    🔄 Reset Jar — Start a fresh emotional cycle anytime
 
   🛠 Tech Stack
 
-      Frontend-only MVP:
-      
-      HTML
-      
-      CSS
-      
-      JavaScript
-      
-      No frameworks yet — built as a vibe-coded interactive prototype.
-
-  🚀 How to Run
-
-      Clone the repo:
-      
-      git clone https://github.com/ynx0618/mood-jar.git
-      
-      
-      Open folder.
-      
-      Double-click:
-      
-      index.html
-      
-      
-      Runs locally in browser.
-      
-      No server required.
+    Frontend-only MVP:
+        
+    HTML
+        
+    CSS
+        
+    JavaScript
+        
+    No frameworks yet — built as a vibe-coded interactive prototype.
 
   🌱 Future Features
+  
+    📅 Calendar view of emotional patterns
 
-      Planned expansions:
-      
-      Archive gallery UI
-      
-      Emotional timeline view
-      
-      Jar export as image
-      
-      Color blending physics
-      
-      Sound design (liquid pour / glass tap)
-      
-      Daily reminder system
-      
-      Mobile optimization
+    🌈 More mood types and color palettes
+
+    📈 Long-term analytics and trend graphs
+
+    🔗 Shareable Mood Wrap summaries
+    
+    ☁️ Cloud save / account sync
+    
+    📱 Mobile UI optimization
+    
+    🖼️ Optional photo memory attachments
+    
+    🎧 Music or scent memory integrations
 
   🎨 Design Philosophy
 
@@ -180,18 +69,6 @@ Think: Digital emotion bottle × memory jar × sand art therapy.
       Soft aesthetics make emotional tracking inviting.
       
       It’s less about productivity — more about emotional presence.
-
-  🧠 Inspiration
-
-      Art bottles
-      
-      Memory jars
-      
-      Polaroid scrapbooks
-      
-      Spotify Wrapped
-      
-      Finch / How We Feel apps
 
 👩‍💻 Author
 
