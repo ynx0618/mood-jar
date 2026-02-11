@@ -1,0 +1,528 @@
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  color: #111827;
+
+  background:
+    radial-gradient(circle at top left, #ffe4f4 0, transparent 55%),
+    radial-gradient(circle at bottom right, #dbeafe 0, transparent 50%),
+    #f9fafb;
+}
+
+.app {
+  max-width: 1120px;
+  width: 100%;
+  padding: 40px 32px 32px;
+  box-sizing: border-box;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 42px;
+  letter-spacing: 0.04em;
+  background: linear-gradient(90deg, #ec4899, #f97316, #22c55e, #38bdf8);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.app-subtitle {
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.app-main {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.jar-panel {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.jar-shell {
+  padding: 18px 18px 12px;
+  border-radius: 40px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.35));
+  box-shadow:
+    0 28px 60px rgba(15,23,42,0.18),
+    inset 0 0 0 1px rgba(255,255,255,0.8);
+}
+
+/* Pour area */
+
+#pourArea {
+  position: relative;
+  width: 160px;
+  height: 60px;
+}
+
+/* Jar */
+
+#jar {
+  width: 160px;
+  height: 260px;
+  border: 5px solid #cbd5e1;
+  border-radius: 0 0 60px 60px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    inset 0 0 20px rgba(255,255,255,0.6),
+    0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Canvas that holds the liquid animation */
+
+#jarCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#jar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  /* Soft water-like texture/highlights inside the glass */
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255,255,255,0.45) 0, transparent 55%),
+    radial-gradient(circle at 80% 25%, rgba(255,255,255,0.22) 0, transparent 55%),
+    radial-gradient(circle at 15% 80%, rgba(255,255,255,0.16) 0, transparent 60%);
+
+  mix-blend-mode: screen;
+  opacity: 0.8;
+}
+
+/* We no longer use DOM layers; the liquid is drawn on canvas */
+
+.jar-message {
+  margin: 0;
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.jar-counter {
+  width: 100%;
+  max-width: 200px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jar-counter-bar {
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.8);
+  box-shadow:
+    inset 0 0 0 1px rgba(148,163,184,0.35),
+    0 10px 20px rgba(15,23,42,0.12);
+  overflow: hidden;
+}
+
+.jar-counter-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ec4899, #eab308, #22c55e, #38bdf8);
+  transition: width 300ms ease-out;
+}
+
+.jar-counter-text {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Right side controls + cards */
+
+.controls-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  background: rgba(255,255,255,0.92);
+  border-radius: 28px;
+  padding: 20px 22px 22px;
+  box-shadow:
+    0 25px 60px rgba(15,23,42,0.18),
+    0 0 0 1px rgba(148,163,184,0.18);
+  backdrop-filter: blur(20px);
+}
+
+.card-label {
+  margin: 0 0 18px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.mood-btn {
+  border: none;
+  border-radius: 18px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f3f4f6;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: 0 6px 12px rgba(15,23,42,0.05);
+  transition:
+    transform 120ms ease-out,
+    box-shadow 120ms ease-out,
+    background-color 120ms ease-out,
+    border-color 120ms ease-out;
+  border: 1px solid transparent;
+}
+
+.mood-btn .mood-emoji {
+  font-size: 20px;
+}
+
+.mood-btn .mood-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.mood-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(15,23,42,0.14);
+}
+
+.mood-btn.selected {
+  border-color: rgba(59,130,246,0.9);
+  box-shadow: 0 12px 24px rgba(59,130,246,0.18);
+  background: rgba(239,246,255,0.95);
+}
+
+/* Soft mood-specific pastel backgrounds */
+
+.mood-btn[data-mood="happy"] {
+  /* Apricot */
+  background: #fbceb1;
+}
+
+.mood-btn[data-mood="calm"] {
+  /* Nude / Neutral */
+  background: #f2d2bd;
+}
+
+.mood-btn[data-mood="angry"] {
+  /* Crimson — kept soft via opacity in gradients elsewhere */
+  background: #fee2e2;
+}
+
+.mood-btn[data-mood="love"] {
+  /* Light Pink */
+  background: #ffb6c1;
+}
+
+.mood-btn[data-mood="anxious"] {
+  /* Nyanza */
+  background: #ecffdc;
+}
+
+.mood-btn[data-mood="sad"] {
+  /* Pastel Blue */
+  background: #a7c7e7;
+}
+
+.note-input {
+  width: 100%;
+  min-height: 72px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: rgba(249,250,251,0.9);
+  box-sizing: border-box;
+  color: #4b5563;
+  margin-bottom: 14px;
+}
+
+.note-input::placeholder {
+  color: #9ca3af;
+}
+
+.note-input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 1px rgba(59,130,246,0.3);
+}
+
+.primary-btn {
+  width: 100%;
+  border-radius: 18px;
+  padding: 12px 0;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #f9fafb;
+  cursor: pointer;
+  background: linear-gradient(90deg, #ec4899, #f97316, #eab308);
+  box-shadow:
+    0 14px 30px rgba(248,113,113,0.4),
+    0 0 0 1px rgba(248,250,252,0.6);
+  transition:
+    transform 120ms ease-out,
+    box-shadow 120ms ease-out,
+    filter 120ms ease-out;
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  box-shadow:
+    0 18px 40px rgba(248,113,113,0.5),
+    0 0 0 1px rgba(248,250,252,0.8);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+  box-shadow:
+    0 10px 24px rgba(248,113,113,0.4),
+    0 0 0 1px rgba(248,250,252,0.7);
+}
+
+/* Recent moods card */
+
+.recent-card {
+  padding-top: 18px;
+}
+
+.recent-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.recent-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(191,219,254,0.95);
+  font-size: 15px;
+}
+
+.recent-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recent-empty {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.recent-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(249,250,251,0.96);
+}
+
+.recent-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.recent-text-main {
+  font-size: 13px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.recent-text-sub {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Mood wrap popup */
+
+/* Floating emoji */
+
+.floating-emoji {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp 2s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-120px) scale(1.8);
+  }
+}
+
+/* Pour drop */
+
+.liquid-drop {
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  animation: pourDown 1s ease-in forwards;
+}
+
+@keyframes pourDown {
+  0% {
+    transform: translate(-50%, 0);
+  }
+  100% {
+    transform: translate(-50%, 280px);
+    opacity: 0;
+  }
+}
+
+/* Wrap popup — hidden by default */
+
+#wrapPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.3);
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 999;
+}
+
+#wrapPopup.active {
+  display: flex;
+}
+
+.wrap-card {
+  background: rgba(255,255,255,0.98);
+  padding: 22px 22px 20px;
+  border-radius: 28px;
+  width: 320px;
+  box-shadow:
+    0 26px 60px rgba(15,23,42,0.35),
+    0 0 0 1px rgba(148,163,184,0.3);
+  backdrop-filter: blur(24px);
+}
+
+.wrap-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.wrap-pill {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 0 0, #f9a8d4, #facc15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 12px 26px rgba(248,113,113,0.5),
+    0 0 0 1px rgba(248,250,252,0.7);
+}
+
+.wrap-pill-icon {
+  font-size: 18px;
+}
+
+.wrap-eyebrow {
+  margin: 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #9ca3af;
+}
+
+.wrap-total-label {
+  margin: 2px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.wrap-close {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  color: #9ca3af;
+}
+
+#wrapStats h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+#wrapStats p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #4b5563;
+}

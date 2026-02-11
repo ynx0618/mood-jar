@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mood Jar 🌸</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <header class="app-header">
+      <h1 class="app-title">Mood Jar</h1>
+      <p class="app-subtitle">
+        Log your daily moods and watch them bloom
+      </p>
+    </header>
+
+    <main class="app-main">
+
+      <!-- Left: Jar + summary -->
+      <section class="jar-panel">
+
+        <div class="jar-shell">
+          <div id="jar">
+            <canvas id="jarCanvas" width="160" height="260"></canvas>
+          </div>
+        </div>
+
+        <p id="jarMessage" class="jar-message">
+          Your jar is empty. Add your first mood!
+        </p>
+
+        <div class="jar-counter">
+          <div class="jar-counter-bar">
+            <div id="jarCounterFill" class="jar-counter-fill"></div>
+          </div>
+          <span id="jarCounterText" class="jar-counter-text">0 moods</span>
+        </div>
+
+      </section>
+
+      <!-- Right: controls + recent moods -->
+      <section class="controls-panel">
+
+        <div class="card mood-card">
+
+          <p class="card-label">How are you feeling?</p>
+
+          <div id="pourArea"></div>
+
+          <div class="mood-grid">
+
+            <button class="mood-btn" data-mood="happy">
+              <span class="mood-emoji">😊</span>
+              <span class="mood-label">Joyful</span>
+            </button>
+
+            <button class="mood-btn" data-mood="calm">
+              <span class="mood-emoji">😌</span>
+              <span class="mood-label">Calm</span>
+            </button>
+
+            <button class="mood-btn" data-mood="angry">
+              <span class="mood-emoji">😡</span>
+              <span class="mood-label">Energetic</span>
+            </button>
+
+            <button class="mood-btn" data-mood="love">
+              <span class="mood-emoji">💗</span>
+              <span class="mood-label">Loved</span>
+            </button>
+
+            <button class="mood-btn" data-mood="anxious">
+              <span class="mood-emoji">😰</span>
+              <span class="mood-label">Optimistic</span>
+            </button>
+
+            <button class="mood-btn" data-mood="sad">
+              <span class="mood-emoji">😭</span>
+              <span class="mood-label">Sad</span>
+            </button>
+
+          </div>
+
+          <textarea
+            id="diaryText"
+            class="note-input"
+            placeholder="Add a note about today (optional)…"
+          ></textarea>
+
+          <button id="dropBtn" class="primary-btn">
+            Add to Jar
+          </button>
+
+        </div>
+
+        <div class="card recent-card">
+
+          <div class="recent-header">
+            <span class="recent-icon">📅</span>
+            <h2 class="recent-title">Recent Moods</h2>
+          </div>
+
+          <div id="recentList" class="recent-list">
+            <p class="recent-empty">
+              No moods yet. Your story starts today.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Mood Wrap Popup -->
+    <div id="wrapPopup">
+
+      <div class="wrap-card">
+
+        <div class="wrap-header">
+          <div class="wrap-pill">
+            <span class="wrap-pill-icon">💗</span>
+          </div>
+          <div>
+            <p class="wrap-eyebrow">Your Mood Wrap</p>
+            <p id="wrapTotalLabel" class="wrap-total-label">0 moods logged</p>
+          </div>
+          <button class="wrap-close" onclick="closeWrap()">✕</button>
+        </div>
+
+        <div id="wrapStats"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
