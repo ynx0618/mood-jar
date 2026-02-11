@@ -83,5 +83,5 @@ Think: Digital emotion bottle × memory jar × water art therapy.
 
 👩‍💻 Author
 
-Built by Naixue Yang 🌸
-First experimental vibe-coded interactive tool exploring emotional visualization + Gen Z reflective design.
+Built by Naixue Yang 🫧
+First experimental vibe-coded interactive tool exploring emotional visualization.
