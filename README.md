@@ -15,9 +15,11 @@ Think: Digital emotion bottle × memory jar × water art therapy.
 🫙 Features
   
     🌸 Mood Logging — Select an emotion and add a short diary entry
-    
+
     💧 Drop Animation — Each mood falls into the jar visually
-    
+
+![Add Mood Animation](https://raw.githubusercontent.com/ynx0618/mood-jar/main/Add_Mood.gif)
+
     📊 Mood Wrap — View emotional distribution and dominant feelings
     
     🫙 Jar Fill Visualization — Watch the jar fill over time
