@@ -4,31 +4,31 @@ const moodColors = {
   /* Happy – Apricot */
   happy: "#FBCEB1",
 
-  /* Neutral / Calm – Nude */
-  calm: "#F2D2BD",
-
   /* Sad – Pastel Blue */
   sad: "#A7C7E7",
 
-  /* Angry – Crimson */
-  angry: "#DC143C",
-
-  /* Energetic / Optimistic – Nyanza */
-  anxious: "#ECFFDC",
+  /* Energetic – Nyanza */
+  energetic: "#ECFFDC",
 
   /* Loved – Light Pink */
-  love: "#FFB6C1"
+  loved: "#FFB6C1",
+
+  /* Neutral – Nude */
+  neutral: "#F2D2BD",
+
+  /* Angry – Crimson */
+  angry: "#DC143C"
 };
 
 /* Mood counts */
 
 const moodCounts = {
   happy: 0,
-  calm: 0,
   sad: 0,
-  angry: 0,
-  anxious: 0,
-  love: 0
+  energetic: 0,
+  loved: 0,
+  neutral: 0,
+  angry: 0
 };
 
 let selectedMood = null;
@@ -49,6 +49,19 @@ const BAND_HEIGHT = 30;
 let waveTime = 0;
 let dropImpulse = 0;
 
+/* Current jar + archive state */
+
+let currentJar = {
+  id: `jar_${Date.now()}`,
+  createdAt: new Date().toISOString()
+};
+
+let currentEntries = []; // { mood, note, at }
+let archivedJars = [];
+
+const STORAGE_KEY_ARCHIVES =
+  "moodJar.archivedJars.v1";
+
 /* Simple helpers for totals + pretty names */
 
 function getTotalMoods() {
@@ -58,12 +71,12 @@ function getTotalMoods() {
 
 function prettyMoodName(key) {
   const map = {
-    happy: "Joyful",
-    calm: "Calm",
+    happy: "Happy",
     sad: "Sad",
-    angry: "Energetic",
-    anxious: "Optimistic",
-    love: "Loved"
+    energetic: "Energetic",
+    loved: "Loved",
+    neutral: "Neutral",
+    angry: "Angry"
   };
   return map[key] || key;
 }
@@ -162,6 +175,123 @@ function updateJarSideUI() {
     fillEl.style.width =
       `${Math.round(ratio * 100)}%`;
   }
+}
+
+/* Archive helpers */
+
+function loadArchives() {
+  try {
+    const raw =
+      localStorage.getItem(STORAGE_KEY_ARCHIVES);
+    if (!raw) {
+      archivedJars = [];
+      return;
+    }
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) {
+      archivedJars = parsed;
+    } else {
+      archivedJars = [];
+    }
+  } catch (e) {
+    archivedJars = [];
+  }
+}
+
+function saveArchives() {
+  try {
+    localStorage.setItem(
+      STORAGE_KEY_ARCHIVES,
+      JSON.stringify(archivedJars)
+    );
+  } catch (e) {
+    // ignore
+  }
+}
+
+function formatDateRange(startIso, endIso) {
+  const start = startIso ? new Date(startIso) : null;
+  const end = endIso ? new Date(endIso) : null;
+  if (!start && !end) return "";
+
+  if (start && end) {
+    const sameDay =
+      start.toDateString() === end.toDateString();
+    if (sameDay) {
+      return formatDate(start);
+    }
+    return `${formatDate(start)} – ${formatDate(end)}`;
+  }
+
+  const d = start || end;
+  return formatDate(d);
+}
+
+function renderArchiveGrid() {
+  const grid =
+    document.getElementById("archiveGrid");
+  if (!grid) return;
+
+  if (!archivedJars.length) {
+    grid.innerHTML =
+      `<p class="archive-empty">No archived jars yet. Reset your jar to start preserving chapters.</p>`;
+    return;
+  }
+
+  const items = archivedJars
+    .map((jar, index) => {
+      const total = jar.totalEntries || 0;
+      const moods = jar.moods || {};
+
+      let topMood = null;
+      let maxCount = 0;
+      for (const key in moods) {
+        if (moods[key] > maxCount) {
+          maxCount = moods[key];
+          topMood = key;
+        }
+      }
+
+      const dominantName =
+        topMood ? prettyMoodName(topMood) : "Mixed";
+
+      const dateLabel =
+        formatDateRange(jar.createdAt, jar.archivedAt);
+
+      const title =
+        `Jar ${archivedJars.length - index} • ${dominantName}`;
+
+      const layers =
+        Array.isArray(jar.layers)
+          ? jar.layers
+          : [];
+
+      const layerDivs = layers
+        .map(
+          c =>
+            `<div class="archive-mini-layer" style="background:${c};"></div>`
+        )
+        .join("");
+
+      return `
+        <button class="archive-item" data-archive-id="${jar.id}">
+          <div class="archive-mini-jar">
+            <div class="archive-mini-glass">
+              <div class="archive-mini-layers">
+                ${layerDivs}
+              </div>
+            </div>
+          </div>
+          <div class="archive-meta">
+            <p class="archive-meta-title">${title}</p>
+            <p class="archive-meta-sub">${dateLabel || "Unknown range"} · ${total} mood${total === 1 ? "" : "s"}</p>
+          </div>
+        </button>
+      `;
+    })
+    .join("");
+
+  grid.innerHTML = items;
 }
 
 /* Floating emoji */

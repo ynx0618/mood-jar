@@ -19,30 +19,41 @@
 
     <main class="app-main">
 
-      <!-- Left: Jar + summary -->
-      <section class="jar-panel">
+      <nav class="tabs">
+        <button class="tab active" data-tab="current">Current Jar</button>
+        <button class="tab" data-tab="archive">Archive Collection</button>
+      </nav>
 
-        <div class="jar-shell">
-          <div id="jar">
-            <canvas id="jarCanvas" width="160" height="260"></canvas>
+      <div id="currentView" class="app-view app-view-current active">
+
+        <!-- Left: Jar + summary -->
+        <section class="jar-panel">
+
+          <div class="jar-shell">
+            <div id="jar">
+              <canvas id="jarCanvas" width="160" height="260"></canvas>
+            </div>
           </div>
-        </div>
 
-        <p id="jarMessage" class="jar-message">
-          Your jar is empty. Add your first mood!
-        </p>
+          <p id="jarMessage" class="jar-message">
+            Your jar is empty. Add your first mood!
+          </p>
 
-        <div class="jar-counter">
-          <div class="jar-counter-bar">
-            <div id="jarCounterFill" class="jar-counter-fill"></div>
+          <div class="jar-counter">
+            <div class="jar-counter-bar">
+              <div id="jarCounterFill" class="jar-counter-fill"></div>
+            </div>
+            <span id="jarCounterText" class="jar-counter-text">0 moods</span>
           </div>
-          <span id="jarCounterText" class="jar-counter-text">0 moods</span>
-        </div>
 
-      </section>
+          <button id="resetJarBtn" class="secondary-btn">
+            Reset Jar 🌱
+          </button>
 
-      <!-- Right: controls + recent moods -->
-      <section class="controls-panel">
+        </section>
+
+        <!-- Right: controls + recent moods -->
+        <section class="controls-panel">
 
         <div class="card mood-card">
 
@@ -53,33 +64,33 @@
           <div class="mood-grid">
 
             <button class="mood-btn" data-mood="happy">
-              <span class="mood-emoji">😊</span>
-              <span class="mood-label">Joyful</span>
+              <span class="mood-emoji">🔅</span>
+              <span class="mood-label">Happy</span>
             </button>
 
-            <button class="mood-btn" data-mood="calm">
-              <span class="mood-emoji">😌</span>
-              <span class="mood-label">Calm</span>
+            <button class="mood-btn" data-mood="neutral">
+              <span class="mood-emoji">🪷</span>
+              <span class="mood-label">Neutral</span>
             </button>
 
-            <button class="mood-btn" data-mood="angry">
-              <span class="mood-emoji">😡</span>
+            <button class="mood-btn" data-mood="energetic">
+              <span class="mood-emoji">🎧</span>
               <span class="mood-label">Energetic</span>
             </button>
 
-            <button class="mood-btn" data-mood="love">
-              <span class="mood-emoji">💗</span>
+            <button class="mood-btn" data-mood="loved">
+              <span class="mood-emoji">🤍</span>
               <span class="mood-label">Loved</span>
             </button>
 
-            <button class="mood-btn" data-mood="anxious">
-              <span class="mood-emoji">😰</span>
-              <span class="mood-label">Optimistic</span>
+            <button class="mood-btn" data-mood="sad">
+              <span class="mood-emoji">🫧</span>
+              <span class="mood-label">Sad</span>
             </button>
 
-            <button class="mood-btn" data-mood="sad">
-              <span class="mood-emoji">😭</span>
-              <span class="mood-label">Sad</span>
+            <button class="mood-btn" data-mood="angry">
+              <span class="mood-emoji">🌪️</span>
+              <span class="mood-label">Angry</span>
             </button>
 
           </div>
@@ -113,6 +124,33 @@
 
       </section>
 
+      </div>
+
+      <div id="archiveView" class="app-view app-view-archive">
+
+        <section class="archive-panel">
+
+          <div class="card archive-root-card">
+
+            <div class="archive-header">
+              <div>
+                <p class="archive-eyebrow">Archive</p>
+                <h2 class="archive-title">Archive Collection</h2>
+              </div>
+            </div>
+
+            <div id="archiveGrid" class="archive-grid">
+              <p class="archive-empty">
+                No archived jars yet. Reset your jar to start preserving chapters.
+              </p>
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
     </main>
 
     <!-- Mood Wrap Popup -->
@@ -135,6 +173,50 @@
 
       </div>
 
+    </div>
+
+    <!-- Reset confirmation -->
+    <div id="resetModal" class="modal-overlay">
+      <div class="modal-card">
+        <h2 class="modal-title">Archive & Reset Jar?</h2>
+        <p class="modal-body">
+          Do you want to archive your current Mood Jar and start a new one? Your moods will be saved in your Archive Collection.
+        </p>
+        <div class="modal-actions">
+          <button id="confirmResetBtn" class="primary-btn modal-primary">
+            Archive & Reset
+          </button>
+          <button id="cancelResetBtn" class="secondary-btn modal-secondary">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Archive detail modal -->
+    <div id="archiveModal" class="modal-overlay">
+      <div class="archive-detail-card">
+
+        <div class="archive-detail-header">
+          <div>
+            <p id="archiveDetailTitle" class="archive-detail-title"></p>
+            <p id="archiveDetailSub" class="archive-detail-sub"></p>
+          </div>
+          <button id="archiveDetailClose" class="wrap-close">✕</button>
+        </div>
+
+        <div class="archive-detail-content">
+          <div class="archive-detail-jar-shell">
+            <div class="archive-mini-jar">
+              <div class="archive-mini-glass">
+                <div id="archiveDetailLayers" class="archive-mini-layers"></div>
+              </div>
+            </div>
+          </div>
+          <div id="archiveDetailStats"></div>
+        </div>
+
+      </div>
     </div>
 
   </div>
