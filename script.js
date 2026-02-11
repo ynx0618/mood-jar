@@ -317,7 +317,8 @@ function renderArchiveGrid() {
               <p class="archive-meta-sub small">${entriesCount} entr${entriesCount === 1 ? 'y' : 'ies'}</p>
             </div>
           </button>
-          <button class="archive-edit" data-archive-id="${jar.id}" aria-label="Rename archived jar">✏️</button>
+              <button class="archive-edit" data-archive-id="${jar.id}" aria-label="Rename archived jar">✏️</button>
+              <button class="archive-delete" data-archive-id="${jar.id}" aria-label="Delete archived jar">🗑️</button>
         </div>
       `;
     })
@@ -927,6 +928,50 @@ function openArchiveDetail(jar) {
   archiveModal.classList.add("active");
 }
 
+/* Delete modal handlers */
+const deleteModal = document.getElementById('deleteModal');
+if (deleteModal) {
+  const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+  const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+  if (cancelDeleteBtn) {
+    cancelDeleteBtn.addEventListener('click', () => {
+      deleteModal.classList.remove('active');
+      deleteModal.removeAttribute('data-pending-id');
+    });
+  }
+
+  if (confirmDeleteBtn) {
+    confirmDeleteBtn.addEventListener('click', () => {
+      const pendingId = deleteModal.getAttribute('data-pending-id');
+      if (!pendingId) {
+        deleteModal.classList.remove('active');
+        return;
+      }
+
+      // Find the DOM card for animation
+      const itemBtn = document.querySelector(`.archive-item[data-archive-id="${pendingId}"]`);
+      const cardEl = itemBtn ? itemBtn.closest('.archive-card') : null;
+
+      if (cardEl) {
+        cardEl.classList.add('deleting');
+      }
+
+      // after animation, remove from data + re-render
+      setTimeout(() => {
+        const idx = archivedJars.findIndex(j => j.id === pendingId);
+        if (idx >= 0) {
+          archivedJars.splice(idx, 1);
+          saveArchives();
+        }
+        deleteModal.classList.remove('active');
+        deleteModal.removeAttribute('data-pending-id');
+        renderArchiveGrid();
+      }, 320);
+    });
+  }
+}
+
 document
   .getElementById("archiveDetailClose")
   .addEventListener("click", () => {
@@ -954,6 +999,22 @@ document
       jar.name = newName;
       saveArchives();
       renderArchiveGrid();
+      return;
+    }
+
+    // Delete flow: if delete icon clicked
+    const deleteBtn = target.closest('.archive-delete');
+    if (deleteBtn) {
+      const id = deleteBtn.getAttribute('data-archive-id');
+      if (!id) return;
+      const jar = archivedJars.find(j => j.id === id);
+      if (!jar) return;
+      // show custom delete modal
+      const deleteModal = document.getElementById('deleteModal');
+      if (!deleteModal) return;
+      deleteModal.classList.add('active');
+      // store pending id
+      deleteModal.setAttribute('data-pending-id', id);
       return;
     }
 

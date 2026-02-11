@@ -568,6 +568,7 @@ body {
   align-items: center;
   gap: 8px;
   margin: 8px;
+  position: relative;
 }
 
 .archive-item {
@@ -602,6 +603,31 @@ body {
 }
 
 .archive-edit:hover { transform: translateY(-1px); }
+
+.archive-delete {
+  border: none;
+  background: rgba(255,255,255,0.95);
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(15,23,42,0.06);
+  margin-left: 6px;
+}
+
+.archive-delete:hover { transform: translateY(-1px); }
+
+.archive-card.deleting {
+  transition: transform 300ms ease, opacity 300ms ease;
+  opacity: 0;
+  transform: scale(0.98);
+  pointer-events: none;
+}
+
+.modal-primary-danger {
+  background: linear-gradient(90deg, #f97316, #ef4444);
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(239,68,68,0.18);
+}
 
 .archive-mini-layer {
   width: 100%;
