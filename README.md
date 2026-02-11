@@ -50,6 +50,13 @@ Think: Digital emotion bottle × memory jar × water art therapy.
     JavaScript
         
     No frameworks yet — built as a vibe-coded interactive prototype.
+    
+  🚧 Currently Working On
+  
+    🌧️ Ambient Mood Backgrounds: building immersive environmental animations that react to selected moods.
+
+        Example — Sad mood triggers rainfall overlay:
+  ![Add Mood Animation](https://raw.githubusercontent.com/ynx0618/mood-jar/main/Sad%20Raining%20Animation.gif)
 
   🌱 Future Features
   
