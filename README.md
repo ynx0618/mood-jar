@@ -20,23 +20,23 @@ Think: Digital emotion bottle × memory jar × water art therapy.
     💧 Drop Animation — Each mood falls into the jar visually
       (🚧 With new font & background WIP):
 
-![Add Mood Animation](https://raw.githubusercontent.com/ynx0618/mood-jar/main/New%20Add%20Mood.gif)
+![Add Mood Animation](https://raw.githubusercontent.com/naixueyang/mood-jar/main/New%20Add%20Mood.gif)
 
     📊 Mood Wrap — View emotional distribution and dominant feelings
 
-  ![Mood Wrap](https://raw.githubusercontent.com/ynx0618/mood-jar/main/Mood%20Wrap.png)
+  ![Mood Wrap](https://raw.githubusercontent.com/naixueyang/mood-jar/main/Mood%20Wrap.png)
 
     ✏️ Diary Memories — Each mood can hold a written reflection
   
-  ![Diary Memories](https://raw.githubusercontent.com/ynx0618/mood-jar/main/Diary%20Memories.png)
+  ![Diary Memories](https://raw.githubusercontent.com/naixueyang/mood-jar/main/Diary%20Memories.png)
   
     🫙 Jar Fill Visualization — Watch the jar fill over time
     
-  ![Filled Mood Jar](https://raw.githubusercontent.com/ynx0618/mood-jar/main/Filled%20Mood%20Jar.png)
+  ![Filled Mood Jar](https://raw.githubusercontent.com/naixueyang/mood-jar/main/Filled%20Mood%20Jar.png)
   
     🗂️ Archive Collection — Store and revisit past jars
     
-  ![Archived Jars](https://raw.githubusercontent.com/ynx0618/mood-jar/main/Archived%20Jars.png)
+  ![Archived Jars](https://raw.githubusercontent.com/naixueyang/mood-jar/main/Archived%20Jars.png)
     
     🔄 Reset Jar — Start a fresh emotional cycle anytime
 
@@ -57,7 +57,7 @@ Think: Digital emotion bottle × memory jar × water art therapy.
     🌧️ Ambient Mood Backgrounds: building immersive environmental animations that react to selected moods.
 
         Example — Sad mood triggers rainfall overlay:
-  ![Add Mood Animation](https://raw.githubusercontent.com/ynx0618/mood-jar/main/Sad%20Raining%20Animation.gif)
+  ![Add Mood Animation](https://raw.githubusercontent.com/naixueyang/mood-jar/main/Sad%20Raining%20Animation.gif)
 
   🌱 Future Features
   
