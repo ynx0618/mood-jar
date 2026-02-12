@@ -1,6 +1,6 @@
 🌸 Mood Jar
 
-🌐 Live at: [https://ynx0618.github.io/mood-jar/](https://naixueyang.github.io/mood-jar/)
+🌐 Live at: https://naixueyang.github.io/mood-jar/
 
 ✨ Concept
 
